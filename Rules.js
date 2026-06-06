@@ -32,7 +32,7 @@ export const Rules = () => {
       icon: 'Sword',
       content: html`
         <div className="space-y-4">
-          <p>Stable SMP is a full PvP server. Combat is part of daily life here — be ready.</p>
+          <p>Headbound SMP is a full PvP server. Combat is part of daily life here — be ready.</p>
           <div className="bg-gray-50 p-4 rounded-2xl border border-gray-100 group-hover:border-blue-200 transition-all">
             <div className="flex items-center gap-2 mb-2">
               <div className="w-2 h-2 rounded-full bg-blue-500"></div>
