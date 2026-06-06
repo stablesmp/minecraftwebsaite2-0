@@ -90,7 +90,7 @@ export const Home = ({ onNavigate }) => {
       <section className="py-24 px-6 bg-gray-50">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-20 reveal">
-            <h2 className="text-4xl font-black mb-4 text-gray-900 uppercase tracking-tight">Why Stable SMP?</h2>
+            <h2 className="text-4xl font-black mb-4 text-gray-900 uppercase tracking-tight">Why Headbound SMP?</h2>
             <div className="h-1 w-16 bg-blue-500 mx-auto rounded-full"></div>
             <p className="mt-6 text-gray-500 max-w-2xl mx-auto font-medium leading-relaxed">
               Small server, real stakes. PvP is live, stealing is fair game — but your builds will never be touched.
@@ -99,7 +99,7 @@ export const Home = ({ onNavigate }) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             ${FEATURES.map((feature, idx) => {
               const Icon = Lucide[feature.icon];
-              const isLocked = feature.title === 'Create Mod Server';
+              const isLocked = false;
               return html`
                 <div
                   key=${idx}
