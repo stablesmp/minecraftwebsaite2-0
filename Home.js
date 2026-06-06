@@ -51,6 +51,11 @@ export const Home = ({ onNavigate }) => {
       <!-- ── Hero Text ── -->
       <section className="relative px-6 pb-20 -mt-4">
         <div className="text-center max-w-4xl mx-auto reveal">
+          <img
+            src="./headbound_icon.svg"
+            alt="Headbound SMP Icon"
+            className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-4 animate-float"
+          />
           <${Logo} size="lg" className="mb-6 justify-center" />
           <p className="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
             Fight, steal, build, and survive. A raw PvP world for 30–50 players who actually get to know each other.
