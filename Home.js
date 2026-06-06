@@ -47,7 +47,8 @@ export const Home = ({ onNavigate }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white"></div>
         <!-- Icon overlaid on hero image -->
-        <div className="absolute animate-float z-10 w-56 h-56 md:w-80 md:h-80" style=${{ top: '38%', left: '0', right: '0', marginLeft: 'auto', marginRight: 'auto', transform: 'translateY(-50%)' }}>
+        <div className="absolute z-10" style=${{ top: '38%', left: 0, right: 0, transform: 'translateY(-50%)', display: 'flex', justifyContent: 'center' }}>
+        <div className="animate-float w-56 h-56 md:w-80 md:h-80">
           <svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
             <defs><clipPath id="face-clip"><rect x="233" y="160" width="214" height="210"/></clipPath></defs>
             <rect x="200" y="120" width="280" height="280" rx="16" fill="#1a1008" opacity="0.35"/>
@@ -86,6 +87,7 @@ export const Home = ({ onNavigate }) => {
             <text x="340" y="440" text-anchor="middle" font-family="'Courier New', monospace" font-size="48" font-weight="700" fill="#C68642" letter-spacing="4">HEADBOUND</text>
             <text x="340" y="468" text-anchor="middle" font-family="'Courier New', monospace" font-size="18" font-weight="400" fill="#8B5A2B" letter-spacing="6">MINECRAFT SERVER</text>
           </svg>
+        </div>
         </div>
       </div>
 
