@@ -46,51 +46,52 @@ export const Home = ({ onNavigate }) => {
           alt="Server landscape"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white"></div>
+        <!-- Icon overlaid on hero image -->
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-36 h-36 md:w-52 md:h-52 animate-float z-10">
+          <svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
+            <defs><clipPath id="face-clip"><rect x="233" y="160" width="214" height="210"/></clipPath></defs>
+            <rect x="200" y="120" width="280" height="280" rx="16" fill="#1a1008" opacity="0.35"/>
+            <line x1="100" y1="252" x2="450" y2="238" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
+            <line x1="130" y1="250" x2="450" y2="238" stroke="#A0550A" stroke-width="3" opacity="0.4"/>
+            <polygon points="100,252 115,238 108,258" fill="#CC3333"/>
+            <polygon points="100,252 112,268 108,250" fill="#993333"/>
+            <polygon points="100,252 95,238 105,242" fill="#CC4444"/>
+            <line x1="450" y1="238" x2="580" y2="227" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
+            <line x1="452" y1="238" x2="555" y2="228" stroke="#A0550A" stroke-width="3" opacity="0.4"/>
+            <polygon points="580,227 555,218 562,232" fill="#C0C0C0"/>
+            <polygon points="580,227 555,236 562,222" fill="#A0A0A0"/>
+            <rect x="260" y="40" width="160" height="30" fill="#5C3317"/>
+            <rect x="230" y="70" width="220" height="30" fill="#5C3317"/>
+            <rect x="230" y="100" width="220" height="30" fill="#5C3317"/>
+            <rect x="230" y="130" width="60" height="30" fill="#5C3317"/>
+            <rect x="290" y="130" width="100" height="30" fill="#C68642"/>
+            <rect x="390" y="130" width="60" height="30" fill="#5C3317"/>
+            <rect x="230" y="160" width="220" height="30" fill="#C68642"/>
+            <rect x="230" y="190" width="220" height="30" fill="#C68642"/>
+            <rect x="230" y="220" width="220" height="30" fill="#C68642"/>
+            <rect x="230" y="250" width="220" height="30" fill="#C68642"/>
+            <rect x="230" y="280" width="220" height="30" fill="#C68642"/>
+            <rect x="230" y="310" width="220" height="30" fill="#C68642"/>
+            <rect x="290" y="340" width="100" height="30" fill="#C68642"/>
+            <g clip-path="url(#face-clip)">
+              <line x1="268" y1="218" x2="312" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+              <line x1="312" y1="218" x2="268" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+              <line x1="368" y1="218" x2="412" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+              <line x1="412" y1="218" x2="368" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+            </g>
+            <rect x="320" y="260" width="30" height="20" fill="#A0622A"/>
+            <rect x="275" y="300" width="30" height="15" fill="#3a1a08"/>
+            <rect x="305" y="310" width="70" height="10" fill="#3a1a08"/>
+            <rect x="375" y="300" width="30" height="15" fill="#3a1a08"/>
+            <text x="340" y="440" text-anchor="middle" font-family="'Courier New', monospace" font-size="48" font-weight="700" fill="#C68642" letter-spacing="4">HEADBOUND</text>
+            <text x="340" y="468" text-anchor="middle" font-family="'Courier New', monospace" font-size="18" font-weight="400" fill="#8B5A2B" letter-spacing="6">MINECRAFT SERVER</text>
+          </svg>
+        </div>
       </div>
 
       <!-- ── Hero Text ── -->
-      <section className="relative px-6 pb-20 -mt-4">
+      <section className="relative px-6 pb-20 mt-28 md:mt-36">
         <div className="text-center max-w-4xl mx-auto reveal">
-          <div className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-4 animate-float">
-            <svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
-              <defs><clipPath id="face-clip"><rect x="233" y="160" width="214" height="210"/></clipPath></defs>
-              <rect x="200" y="120" width="280" height="280" rx="16" fill="#1a1008" opacity="0.35"/>
-              <line x1="100" y1="252" x2="450" y2="238" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
-              <line x1="130" y1="250" x2="450" y2="238" stroke="#A0550A" stroke-width="3" opacity="0.4"/>
-              <polygon points="100,252 115,238 108,258" fill="#CC3333"/>
-              <polygon points="100,252 112,268 108,250" fill="#993333"/>
-              <polygon points="100,252 95,238 105,242" fill="#CC4444"/>
-              <line x1="450" y1="238" x2="580" y2="227" stroke="#8B4513" stroke-width="12" stroke-linecap="round"/>
-              <line x1="452" y1="238" x2="555" y2="228" stroke="#A0550A" stroke-width="3" opacity="0.4"/>
-              <polygon points="580,227 555,218 562,232" fill="#C0C0C0"/>
-              <polygon points="580,227 555,236 562,222" fill="#A0A0A0"/>
-              <rect x="260" y="40" width="160" height="30" fill="#5C3317"/>
-              <rect x="230" y="70" width="220" height="30" fill="#5C3317"/>
-              <rect x="230" y="100" width="220" height="30" fill="#5C3317"/>
-              <rect x="230" y="130" width="60" height="30" fill="#5C3317"/>
-              <rect x="290" y="130" width="100" height="30" fill="#C68642"/>
-              <rect x="390" y="130" width="60" height="30" fill="#5C3317"/>
-              <rect x="230" y="160" width="220" height="30" fill="#C68642"/>
-              <rect x="230" y="190" width="220" height="30" fill="#C68642"/>
-              <rect x="230" y="220" width="220" height="30" fill="#C68642"/>
-              <rect x="230" y="250" width="220" height="30" fill="#C68642"/>
-              <rect x="230" y="280" width="220" height="30" fill="#C68642"/>
-              <rect x="230" y="310" width="220" height="30" fill="#C68642"/>
-              <rect x="290" y="340" width="100" height="30" fill="#C68642"/>
-              <g clip-path="url(#face-clip)">
-                <line x1="268" y1="218" x2="312" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
-                <line x1="312" y1="218" x2="268" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
-                <line x1="368" y1="218" x2="412" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
-                <line x1="412" y1="218" x2="368" y2="252" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
-              </g>
-              <rect x="320" y="260" width="30" height="20" fill="#A0622A"/>
-              <rect x="275" y="300" width="30" height="15" fill="#3a1a08"/>
-              <rect x="305" y="310" width="70" height="10" fill="#3a1a08"/>
-              <rect x="375" y="300" width="30" height="15" fill="#3a1a08"/>
-              <text x="340" y="440" text-anchor="middle" font-family="'Courier New', monospace" font-size="48" font-weight="700" fill="#C68642" letter-spacing="4">HEADBOUND</text>
-              <text x="340" y="468" text-anchor="middle" font-family="'Courier New', monospace" font-size="18" font-weight="400" fill="#8B5A2B" letter-spacing="6">MINECRAFT SERVER</text>
-            </svg>
-          </div>
           <${Logo} size="lg" className="mb-6 justify-center" />
           <p className="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
             Fight, steal, build, and survive. A raw PvP world for 30–50 players who actually get to know each other.
