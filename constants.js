@@ -16,9 +16,9 @@ export const FEATURES = [
     icon: 'Shield',
   },
   {
-    title: 'Create Mod Server',
-    description: 'Powered by the Create mod. Build war machines, automate production, and engineer your empire.',
-    icon: 'Gamepad2',
+    title: '3 Lives System',
+    description: 'Every player gets 3 lives. Lose them all and you\'re out — until a teammate hunts you down and respawns you. Choose your battles wisely.',
+    icon: 'Heart',
   },
   {
     title: 'Events & Raids',
