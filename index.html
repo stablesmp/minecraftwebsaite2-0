@@ -49,6 +49,9 @@
 
         :root {
             --green-glow: #C68642;
+            --brand: #C68642;
+            --brand-dark: #8B5A2B;
+            --brand-light: #fdf6ee;
         }
 
         body {
@@ -114,6 +117,30 @@
         .animate-float {
             animation: float 4s ease-in-out infinite;
         }
+
+        /* ── Override blue → brand orange #C68642 ── */
+        .text-blue-400, .text-blue-500, .text-blue-600 { color: #C68642 !important; }
+        .text-blue-700 { color: #8B5A2B !important; }
+        .bg-blue-600 { background-color: #C68642 !important; }
+        .bg-blue-50 { background-color: #fdf6ee !important; }
+        .bg-blue-100 { background-color: #f9e8d0 !important; }
+        .border-blue-100 { border-color: #f2cfa0 !important; }
+        .border-blue-200 { border-color: #f2cfa0 !important; }
+        .border-blue-500 { border-color: #C68642 !important; }
+        .hover\:bg-blue-500:hover { background-color: #b8752e !important; }
+        .hover\:bg-blue-50:hover { background-color: #fdf6ee !important; }
+        .hover\:bg-blue-100:hover { background-color: #f9e8d0 !important; }
+        .hover\:text-blue-600:hover { color: #C68642 !important; }
+        .hover\:text-blue-500:hover { color: #C68642 !important; }
+        .hover\:border-blue-200:hover { border-color: #f2cfa0 !important; }
+        .focus\:border-blue-500:focus { border-color: #C68642 !important; }
+        .group:hover .group-hover\:bg-blue-100 { background-color: #f9e8d0 !important; }
+        .group:hover .group-hover\:text-blue-600 { color: #C68642 !important; }
+        .group:hover .group-hover\:border-blue-200 { border-color: #f2cfa0 !important; }
+        .group:hover .group-hover\:scale-110 { transform: scale(1.1); }
+        .bg-blue-600.shadow-xl { box-shadow: 0 20px 40px rgba(198,134,66,0.25) !important; }
+        .shadow-blue-600\/20 { --tw-shadow-color: rgba(198,134,66,0.2) !important; box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important; }
+        .w-0.group-hover\:w-full, .bg-blue-500 { background-color: #C68642 !important; }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
