@@ -47,7 +47,7 @@ export const Home = ({ onNavigate }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white"></div>
         <!-- Icon overlaid on hero image -->
-        <div className="absolute animate-float z-10 w-56 h-56 md:w-80 md:h-80" style=${{ top: '38%', left: '50%', transform: 'translate(-50%, -50%)' }}>
+        <div className="absolute animate-float z-10 w-56 h-56 md:w-80 md:h-80" style=${{ top: '38%', left: '0', right: '0', marginLeft: 'auto', marginRight: 'auto', transform: 'translateY(-50%)' }}>
           <svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
             <defs><clipPath id="face-clip"><rect x="233" y="160" width="214" height="210"/></clipPath></defs>
             <rect x="200" y="120" width="280" height="280" rx="16" fill="#1a1008" opacity="0.35"/>
@@ -90,7 +90,7 @@ export const Home = ({ onNavigate }) => {
       </div>
 
       <!-- ── Hero Text ── -->
-      <section className="relative px-6 pb-20 mt-2">
+      <section className="relative px-6 pb-20 -mt-8">
         <div className="text-center max-w-4xl mx-auto reveal">
           <${Logo} size="lg" className="mb-6 justify-center" />
           <p className="text-xl md:text-2xl text-gray-500 mb-10 max-w-2xl mx-auto leading-relaxed font-light">
