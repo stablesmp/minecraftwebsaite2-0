@@ -165,7 +165,7 @@ const App = () => {
 
       <footer className="py-12 px-6 border-t border-gray-100 text-center">
         <p className="text-gray-400 text-[10px] font-bold tracking-[0.2em] uppercase">
-          © 2026 Stable SMP • A PvP Survival Community
+          © 2026 Headbound SMP • A PvP Survival Community
         </p>
       </footer>
     </div>
