@@ -47,7 +47,7 @@ export const Home = ({ onNavigate }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/20 to-white"></div>
         <!-- Icon overlaid on hero image -->
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-36 h-36 md:w-52 md:h-52 animate-float z-10">
+        <div className="absolute top-1/2 left-0 right-0 mx-auto -translate-y-1/2 w-56 h-56 md:w-80 md:h-80 animate-float z-10">
           <svg width="100%" viewBox="0 0 680 680" role="img" xmlns="http://www.w3.org/2000/svg">
             <defs><clipPath id="face-clip"><rect x="233" y="160" width="214" height="210"/></clipPath></defs>
             <rect x="200" y="120" width="280" height="280" rx="16" fill="#1a1008" opacity="0.35"/>
