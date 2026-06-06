@@ -45,7 +45,7 @@ export const ApplicationPage = ({ onSubmit }) => {
           </div>
           <h2 className="text-3xl font-black text-gray-900 mb-4 uppercase tracking-tight">Application Sent!</h2>
           <p className="text-gray-500 mb-8 leading-relaxed font-medium">
-            Thank you for your application to Stable SMP. Your responses have been registered. 
+            Thank you for your application to Headbound SMP. Your responses have been registered. 
             A confirmation and future updates will be sent to you on Discord: <strong>${formData.discord}</strong>.
           </p>
           <button 
@@ -148,7 +148,7 @@ export const ApplicationPage = ({ onSubmit }) => {
             </div>
 
             <div className="space-y-2">
-              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">Why do you want to join Stable SMP?</label>
+              <label className="block text-[10px] font-black text-gray-500 uppercase tracking-[0.2em]">Why do you want to join Headbound SMP?</label>
               <textarea
                 required
                 value=${formData.motivation}
