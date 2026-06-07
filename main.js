@@ -7,30 +7,25 @@ import { Rules } from './Rules.js';
 import { ApplicationPage } from './Application.js';
 import { AdminPage } from './Admin.js';
 import * as Lucide from 'lucide-react';
+import { db, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from './firebase.js';
 
 const html = htm.bind(React.createElement);
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
-  const [applications, setApplications] = useState(() => {
-    const saved = localStorage.getItem('applications');
-    return saved ? JSON.parse(saved) : [];
-  });
-  const [modSuggestions, setModSuggestions] = useState(() => {
-    const saved = localStorage.getItem('modSuggestions');
-    return saved ? JSON.parse(saved) : [];
-  });
+  const [applications, setApplications] = useState([]);
   const [isAdmin, setIsAdmin] = useState(false);
   const [showAdminModal, setShowAdminModal] = useState(false);
   const [adminCode, setAdminCode] = useState('');
 
+  // Lyssna på ansökningar från Firebase i realtid
   useEffect(() => {
-    localStorage.setItem('applications', JSON.stringify(applications));
-  }, [applications]);
-
-  useEffect(() => {
-    localStorage.setItem('modSuggestions', JSON.stringify(modSuggestions));
-  }, [modSuggestions]);
+    const unsubscribe = onSnapshot(collection(db, 'applications'), (snapshot) => {
+      const apps = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+      setApplications(apps);
+    });
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const handleHashChange = () => {
@@ -69,40 +64,24 @@ const App = () => {
     }
   };
 
-  const addApplication = (appData) => {
-    const newApp = {
+  // Spara ansökan till Firebase
+  const addApplication = async (appData) => {
+    await addDoc(collection(db, 'applications'), {
       ...appData,
-      id: Math.random().toString(36).substr(2, 9),
       status: 'Pending',
       submittedAt: Date.now()
-    };
-    setApplications([newApp, ...applications]);
+    });
   };
 
-  const addModSuggestion = (suggestionData) => {
-    const newSuggestion = {
-      ...suggestionData,
-      id: Math.random().toString(36).substr(2, 9),
-      submittedAt: Date.now()
-    };
-    setModSuggestions([newSuggestion, ...modSuggestions]);
+  // Uppdatera status i Firebase
+  const updateAppStatus = async (id, status) => {
+    await updateDoc(doc(db, 'applications', id), { status });
   };
 
-  const updateAppStatus = (id, status) => {
-    setApplications(applications.map(app => 
-      app.id === id ? { ...app, status } : app
-    ));
-  };
-
-  const deleteApp = (id) => {
+  // Radera ansökan från Firebase
+  const deleteApp = async (id) => {
     if (window.confirm('Are you sure you want to delete this application?')) {
-      setApplications(applications.filter(app => app.id !== id));
-    }
-  };
-
-  const deleteModSuggestion = (id) => {
-    if (window.confirm('Are you sure you want to delete this suggestion?')) {
-      setModSuggestions(modSuggestions.filter(mod => mod.id !== id));
+      await deleteDoc(doc(db, 'applications', id));
     }
   };
 
@@ -126,7 +105,7 @@ const App = () => {
   return html`
     <div className="min-h-screen bg-white text-gray-900 selection:bg-blue-500/30">
       <${Navbar} currentPage=${currentPage} onNavigate=${handleNavigate} />
-      
+
       <main>
         ${renderPage()}
       </main>
@@ -152,7 +131,7 @@ const App = () => {
                   placeholder="••••••"
                 />
               </div>
-              <button 
+              <button
                 type="submit"
                 className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white font-black rounded-2xl transition-all shadow-md uppercase tracking-widest text-xs"
               >
