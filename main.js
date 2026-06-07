@@ -20,10 +20,18 @@ const App = () => {
 
   // Lyssna på ansökningar från Firebase i realtid
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'applications'), (snapshot) => {
-      const apps = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
-      setApplications(apps);
-    });
+    console.log('🔥 Ansluter till Firebase...');
+    const unsubscribe = onSnapshot(
+      collection(db, 'applications'),
+      (snapshot) => {
+        console.log('✅ Firebase svarade:', snapshot.docs.length, 'ansökningar');
+        const apps = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        setApplications(apps);
+      },
+      (error) => {
+        console.error('❌ Firebase fel:', error);
+      }
+    );
     return () => unsubscribe();
   }, []);
 
@@ -66,11 +74,17 @@ const App = () => {
 
   // Spara ansökan till Firebase
   const addApplication = async (appData) => {
-    await addDoc(collection(db, 'applications'), {
-      ...appData,
-      status: 'Pending',
-      submittedAt: Date.now()
-    });
+    try {
+      console.log('📝 Sparar ansökan till Firebase...');
+      const docRef = await addDoc(collection(db, 'applications'), {
+        ...appData,
+        status: 'Pending',
+        submittedAt: Date.now()
+      });
+      console.log('✅ Ansökan sparad med ID:', docRef.id);
+    } catch (error) {
+      console.error('❌ Fel vid sparande:', error);
+    }
   };
 
   // Uppdatera status i Firebase
