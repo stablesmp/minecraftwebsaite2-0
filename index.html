@@ -161,6 +161,23 @@
 <body>
     <div id="root"></div>
 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyD6_28BooZK4h-9B2minWpLW1PzJuzPZLs",
+        authDomain: "elism-smp.firebaseapp.com",
+        projectId: "elism-smp",
+        storageBucket: "elism-smp.firebasestorage.app",
+        messagingSenderId: "770989437660",
+        appId: "1:770989437660:web:667a9243a75736b0453a19"
+      };
+      firebase.initializeApp(firebaseConfig);
+      window.db = firebase.firestore();
+      console.log('🔥 Firebase laddad!');
+    </script>
+
     <!-- React and Dependencies -->
     <script type="importmap">
     {
