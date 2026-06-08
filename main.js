@@ -7,7 +7,7 @@ import { Rules } from './Rules.js';
 import { ApplicationPage } from './Application.js';
 import { AdminPage } from './Admin.js';
 import * as Lucide from 'lucide-react';
-import { db, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc } from './firebase.js';
+const db = window.db;
 
 const html = htm.bind(React.createElement);
 
@@ -21,8 +21,7 @@ const App = () => {
   // Lyssna på ansökningar från Firebase i realtid
   useEffect(() => {
     console.log('🔥 Ansluter till Firebase...');
-    const unsubscribe = onSnapshot(
-      collection(db, 'applications'),
+    const unsubscribe = db.collection('applications').onSnapshot(
       (snapshot) => {
         console.log('✅ Firebase svarade:', snapshot.docs.length, 'ansökningar');
         const apps = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
@@ -76,7 +75,7 @@ const App = () => {
   const addApplication = async (appData) => {
     try {
       console.log('📝 Sparar ansökan till Firebase...');
-      const docRef = await addDoc(collection(db, 'applications'), {
+      const docRef = await db.collection('applications').add({
         ...appData,
         status: 'Pending',
         submittedAt: Date.now()
@@ -89,13 +88,13 @@ const App = () => {
 
   // Uppdatera status i Firebase
   const updateAppStatus = async (id, status) => {
-    await updateDoc(doc(db, 'applications', id), { status });
+    await db.collection('applications').doc(id).update({ status });
   };
 
   // Radera ansökan från Firebase
   const deleteApp = async (id) => {
     if (window.confirm('Are you sure you want to delete this application?')) {
-      await deleteDoc(doc(db, 'applications', id));
+      await db.collection('applications').doc(id).delete();
     }
   };
 
