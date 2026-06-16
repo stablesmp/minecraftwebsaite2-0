@@ -110,7 +110,7 @@ export const Home = ({ onNavigate }) => {
         <!-- Server Stats -->
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center border-t border-gray-100 pt-12 w-full max-w-4xl mx-auto reveal">
           <div className="space-y-1 transition-transform hover:scale-105 duration-300 cursor-default flex flex-col items-center">
-            <div className="text-5xl font-black text-blue-500">13</div>
+            <div className="text-5xl font-black text-blue-500">46</div>
             <div className="text-[10px] text-gray-400 uppercase tracking-[0.4em] font-bold mt-2">Members</div>
           </div>
           <div
