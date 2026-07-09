@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8" />
+  <title>JARVIS 1.0</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <div class="hud" id="hud">
+      <!-- Hörnparenteser -->
+      <span class="bracket tl"></span>
+      <span class="bracket tr"></span>
+      <span class="bracket bl"></span>
+      <span class="bracket br"></span>
+
+      <svg viewBox="0 0 500 500" class="rings">
+        <defs>
+          <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#2b6bff" />
+            <stop offset="60%" stop-color="#1230a8" />
+            <stop offset="100%" stop-color="#0a1440" />
+          </radialGradient>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="4" result="b" />
+            <feMerge>
+              <feMergeNode in="b" /><feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <!-- Yttre gradmarkeringar -->
+        <g class="spin-slow" id="ticks" filter="url(#glow)"></g>
+
+        <!-- Yttre ljusa ring (öppna bågar) -->
+        <g class="spin-rev" filter="url(#glow)">
+          <circle cx="250" cy="250" r="165" fill="none" stroke="#38b6ff"
+                  stroke-width="4" stroke-linecap="round"
+                  stroke-dasharray="620 120 200 96" />
+        </g>
+
+        <!-- Streckad inre cirkel med noder -->
+        <g class="spin" filter="url(#glow)">
+          <circle cx="250" cy="250" r="128" fill="none" stroke="#2f7dff"
+                  stroke-width="2" stroke-dasharray="6 8" />
+          <g fill="#7fd4ff">
+            <circle cx="250" cy="122" r="6" />
+            <circle cx="360" cy="185" r="5" />
+            <circle cx="362" cy="315" r="6" />
+            <circle cx="250" cy="378" r="5" />
+            <circle cx="140" cy="313" r="6" />
+            <circle cx="138" cy="187" r="5" />
+          </g>
+        </g>
+
+        <!-- Central hexagon -->
+        <g class="core" filter="url(#glow)">
+          <polygon points="250,168 320,209 320,291 250,332 180,291 180,209"
+                   fill="url(#coreGlow)" stroke="#4aa8ff" stroke-width="3" />
+          <polygon points="250,196 296,223 296,277 250,304 204,277 204,223"
+                   fill="none" stroke="#8fd0ff" stroke-width="1.5" opacity="0.8" />
+        </g>
+      </svg>
+      <div class="status" id="status">JARVIS 1.0 · REDO</div>
+    </div>
+
+    <section class="panel">
+      <div class="log" id="log"></div>
+      <form class="inputRow" id="form">
+        <button type="button" id="mic" title="Tala med Jarvis">🎤</button>
+        <input id="input" type="text" placeholder="Skriv till Jarvis…" autocomplete="off" />
+        <button type="submit" id="send">Skicka</button>
+      </form>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
