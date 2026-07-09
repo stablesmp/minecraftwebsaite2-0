@@ -1,9 +1,7 @@
-const log = document.getElementById('log');
-const form = document.getElementById('form');
-const input = document.getElementById('input');
 const micBtn = document.getElementById('mic');
 const hud = document.getElementById('hud');
 const status = document.getElementById('status');
+const subtitle = document.getElementById('subtitle');
 
 const history = [];
 
@@ -23,16 +21,11 @@ for (let i = 0; i < 60; i++) {
   ticks.appendChild(line);
 }
 
-function addMsg(text, cls) {
-  const el = document.createElement('div');
-  el.className = 'msg ' + cls;
-  el.textContent = text;
-  log.appendChild(el);
-  log.scrollTop = log.scrollHeight;
-  return el;
-}
-
 function setStatus(t) { status.textContent = 'JARVIS 1.0 · ' + t; }
+function setSubtitle(t, isError = false) {
+  subtitle.textContent = t;
+  subtitle.classList.toggle('error', isError);
+}
 
 async function speak(text) {
   try {
@@ -49,28 +42,22 @@ async function speak(text) {
 
 async function send(text) {
   if (!text.trim()) return;
-  addMsg(text, 'user');
   history.push({ role: 'user', content: text });
-  input.value = '';
   setStatus('TÄNKER…');
+  setSubtitle('Du: ' + text);
   hud.classList.add('talking');
 
   const res = await window.jarvis.chat(history);
   hud.classList.remove('talking');
   setStatus(res.error ? 'FEL' : 'REDO · ' + res.provider.toUpperCase());
-  addMsg(res.text, 'jarvis' + (res.error ? ' error' : ''));
+  setSubtitle(res.text, !!res.error);
   if (!res.error) {
     history.push({ role: 'assistant', content: res.text });
     speak(res.text);
   }
 }
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  send(input.value);
-});
-
-// Röstinmatning via Web Speech API
+// Röststyrning via Web Speech API
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SR) {
   const rec = new SR();
@@ -86,16 +73,17 @@ if (SR) {
     listening = true;
     micBtn.classList.add('listening');
     setStatus('LYSSNAR…');
+    setSubtitle('Jag lyssnar…');
   };
   rec.onend = () => {
     listening = false;
     micBtn.classList.remove('listening');
-    setStatus('REDO');
   };
+  rec.onerror = () => setSubtitle('Jag hörde inget – försök igen.', true);
   rec.onresult = (e) => send(e.results[0][0].transcript);
 } else {
   micBtn.disabled = true;
-  micBtn.title = 'Röstinmatning stöds inte i denna miljö';
+  setSubtitle('Röstinmatning stöds inte i denna miljö.', true);
 }
 
-addMsg('Hej! Jag är Jarvis. Skriv något eller tryck på mikrofonen så pratar vi.', 'jarvis');
+setSubtitle('Hej! Jag är Jarvis. Tryck på mikrofonen och prata med mig.');
