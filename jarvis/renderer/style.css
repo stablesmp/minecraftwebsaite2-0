@@ -17,9 +17,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
 }
-.rings { width: min(65vh, 80%); }
+.rings { width: min(70vh, 80%); }
 
 .bracket {
   position: absolute;
@@ -54,36 +53,22 @@ body {
   text-shadow: 0 0 12px #2f7dff;
 }
 
-/* ---------- Mikrofon & undertext ---------- */
-#mic {
-  margin-top: 26px;
-  width: 74px;
-  height: 74px;
-  border-radius: 50%;
-  font-size: 30px;
-  background: #14306e;
-  color: #cfe6ff;
-  border: 2px solid #3b8bff;
-  cursor: pointer;
-  box-shadow: 0 0 18px rgba(47, 125, 255, 0.45);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-#mic:hover { transform: scale(1.06); box-shadow: 0 0 28px rgba(47, 125, 255, 0.7); }
-#mic.listening {
-  background: #7a1b1b;
-  border-color: #ff5d5d;
-  box-shadow: 0 0 28px rgba(255, 93, 93, 0.6);
-  animation: micPulse 1.2s ease-in-out infinite;
-}
-@keyframes micPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+/* ---------- Status-overlay (påverkar inte centreringen av cirkeln) ---------- */
+.overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  pointer-events: none;
 }
 
 .subtitle {
-  min-height: 3.2em;
+  min-height: 1.55em;
   max-width: 640px;
-  margin-top: 18px;
   padding: 0 24px;
   text-align: center;
   font-size: 16px;

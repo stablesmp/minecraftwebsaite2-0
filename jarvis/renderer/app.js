@@ -1,4 +1,3 @@
-const micBtn = document.getElementById('mic');
 const hud = document.getElementById('hud');
 const status = document.getElementById('status');
 const subtitle = document.getElementById('subtitle');
@@ -27,21 +26,31 @@ function setSubtitle(t, isError = false) {
   subtitle.classList.toggle('error', isError);
 }
 
+let speaking = false;
+
 async function speak(text) {
   try {
     const b64 = await window.jarvis.tts(text);
     if (!b64) return;
+    speaking = true;
     hud.classList.add('talking');
     const audio = new Audio('data:audio/mpeg;base64,' + b64);
-    audio.onended = () => hud.classList.remove('talking');
-    await audio.play();
-  } catch {
+    await new Promise((resolve) => {
+      audio.onended = resolve;
+      audio.onerror = resolve;
+      audio.play().catch(resolve);
+    });
+  } finally {
+    speaking = false;
     hud.classList.remove('talking');
   }
 }
 
+let busy = false;
+
 async function send(text) {
-  if (!text.trim()) return;
+  if (!text.trim() || busy) return;
+  busy = true;
   history.push({ role: 'user', content: text });
   setStatus('TÄNKER…');
   setSubtitle('Du: ' + text);
@@ -53,37 +62,41 @@ async function send(text) {
   setSubtitle(res.text, !!res.error);
   if (!res.error) {
     history.push({ role: 'assistant', content: res.text });
-    speak(res.text);
+    await speak(res.text);
   }
+  busy = false;
+  setStatus('LYSSNAR…');
 }
 
-// Röststyrning via Web Speech API
+// Jarvis lyssnar hela tiden – ingen knapp behövs.
 const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
 if (SR) {
   const rec = new SR();
   rec.lang = 'sv-SE';
+  rec.continuous = true;
   rec.interimResults = false;
-  let listening = false;
 
-  micBtn.addEventListener('click', () => {
-    if (listening) { rec.stop(); return; }
+  rec.onresult = (e) => {
+    // Ignorera det Jarvis själv säger och input medan han jobbar
+    if (speaking || busy) return;
+    const last = e.results[e.results.length - 1];
+    if (last.isFinal) send(last[0].transcript);
+  };
+  // Starta om lyssningen automatiskt om den stannar
+  rec.onend = () => { try { rec.start(); } catch { /* redan startad */ } };
+  rec.onerror = (e) => {
+    if (e.error === 'not-allowed') {
+      setSubtitle('Mikrofonåtkomst nekad – tillåt mikrofonen för att prata med Jarvis.', true);
+    }
+  };
+
+  try {
     rec.start();
-  });
-  rec.onstart = () => {
-    listening = true;
-    micBtn.classList.add('listening');
     setStatus('LYSSNAR…');
-    setSubtitle('Jag lyssnar…');
-  };
-  rec.onend = () => {
-    listening = false;
-    micBtn.classList.remove('listening');
-  };
-  rec.onerror = () => setSubtitle('Jag hörde inget – försök igen.', true);
-  rec.onresult = (e) => send(e.results[0][0].transcript);
+    setSubtitle('Hej! Jag är Jarvis. Prata med mig så svarar jag.');
+  } catch {
+    setSubtitle('Kunde inte starta mikrofonen.', true);
+  }
 } else {
-  micBtn.disabled = true;
   setSubtitle('Röstinmatning stöds inte i denna miljö.', true);
 }
-
-setSubtitle('Hej! Jag är Jarvis. Tryck på mikrofonen och prata med mig.');
