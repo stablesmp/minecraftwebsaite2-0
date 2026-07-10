@@ -31,10 +31,13 @@ body {
 .bracket.bl { bottom: 16%; left: 18%; border-right: none; border-top: none; }
 .bracket.br { bottom: 16%; right: 18%; border-left: none; border-top: none; }
 
-.spin, .spin-rev, .spin-slow { transform-origin: 250px 250px; }
-.spin { animation: rot 24s linear infinite; }
-.spin-rev { animation: rot 16s linear infinite reverse; }
-.spin-slow { animation: rot 60s linear infinite; }
+.spin, .spin-rev, .spin-slow, .spin-nodes { transform-origin: 250px 250px; }
+.spin-nodes { animation: rot 28s linear infinite reverse; }
+/* Varje ring roterar åt sitt eget håll: gradmarkeringarna medurs,
+   ljusa ringen moturs, streckade cirkeln medurs i annan takt */
+.spin { animation: rot 20s linear infinite; }
+.spin-rev { animation: rot 14s linear infinite reverse; }
+.spin-slow { animation: rot 45s linear infinite; }
 @keyframes rot { to { transform: rotate(360deg); } }
 
 .core { animation: pulse 2.6s ease-in-out infinite; transform-origin: 250px 250px; }

@@ -5,7 +5,7 @@ require('dotenv').config({ path: path.join(__dirname, '.env') });
 const OPENAI_KEY = process.env.OPENAI_API_KEY || '';
 const GEMINI_KEY = process.env.GEMINI_API_KEY || '';
 const ELEVENLABS_KEY = process.env.ELEVENLABS_API_KEY || '';
-const ELEVENLABS_VOICE = process.env.ELEVENLABS_VOICE_ID || 'JBFqnCBsd6RMkjVDRZzb';
+const ELEVENLABS_VOICE = process.env.ELEVENLABS_VOICE_ID || 'wDsJlOXPqcvIUKdLXjDs';
 
 const SYSTEM_PROMPT =
   'Du är Jarvis, en hjälpsam svensk AI-assistent på användarens dator. ' +

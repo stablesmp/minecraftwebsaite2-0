@@ -39,11 +39,11 @@
                   stroke-dasharray="620 120 200 96" />
         </g>
 
-        <!-- Streckad inre cirkel med noder -->
-        <g class="spin" filter="url(#glow)">
-          <circle cx="250" cy="250" r="128" fill="none" stroke="#2f7dff"
+        <!-- Streckad inre cirkel med noder (noderna roterar åt motsatt håll) -->
+        <g filter="url(#glow)">
+          <circle class="spin" cx="250" cy="250" r="128" fill="none" stroke="#2f7dff"
                   stroke-width="2" stroke-dasharray="6 8" />
-          <g fill="#7fd4ff">
+          <g class="spin-nodes" fill="#7fd4ff">
             <circle cx="250" cy="122" r="6" />
             <circle cx="360" cy="185" r="5" />
             <circle cx="362" cy="315" r="6" />
