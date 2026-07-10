@@ -1,5 +1,4 @@
 const hud = document.getElementById('hud');
-const status = document.getElementById('status');
 const subtitle = document.getElementById('subtitle');
 
 const history = [];
@@ -20,29 +19,38 @@ for (let i = 0; i < 60; i++) {
   ticks.appendChild(line);
 }
 
-function setStatus(t) { status.textContent = 'JARVIS 1.0 · ' + t; }
-function setSubtitle(t, isError = false) {
-  subtitle.textContent = t;
-  subtitle.classList.toggle('error', isError);
+function showSubtitle(text) {
+  subtitle.textContent = text;
+  subtitle.classList.add('visible');
+}
+function hideSubtitle() {
+  subtitle.classList.remove('visible');
 }
 
 let speaking = false;
 
+// Visar det Jarvis säger som undertext medan rösten spelas upp
 async function speak(text) {
+  speaking = true;
+  hud.classList.add('talking');
+  showSubtitle(text);
   try {
     const b64 = await window.jarvis.tts(text);
-    if (!b64) return;
-    speaking = true;
-    hud.classList.add('talking');
-    const audio = new Audio('data:audio/mpeg;base64,' + b64);
-    await new Promise((resolve) => {
-      audio.onended = resolve;
-      audio.onerror = resolve;
-      audio.play().catch(resolve);
-    });
+    if (b64) {
+      const audio = new Audio('data:audio/mpeg;base64,' + b64);
+      await new Promise((resolve) => {
+        audio.onended = resolve;
+        audio.onerror = resolve;
+        audio.play().catch(resolve);
+      });
+    } else {
+      // Ingen röst tillgänglig – låt texten stå kvar en läsbar stund
+      await new Promise((r) => setTimeout(r, Math.min(8000, 1500 + text.length * 60)));
+    }
   } finally {
     speaking = false;
     hud.classList.remove('talking');
+    hideSubtitle();
   }
 }
 
@@ -52,20 +60,15 @@ async function send(text) {
   if (!text.trim() || busy) return;
   busy = true;
   history.push({ role: 'user', content: text });
-  setStatus('TÄNKER…');
-  setSubtitle('Du: ' + text);
   hud.classList.add('talking');
 
   const res = await window.jarvis.chat(history);
   hud.classList.remove('talking');
-  setStatus(res.error ? 'FEL' : 'REDO · ' + res.provider.toUpperCase());
-  setSubtitle(res.text, !!res.error);
   if (!res.error) {
     history.push({ role: 'assistant', content: res.text });
     await speak(res.text);
   }
   busy = false;
-  setStatus('LYSSNAR…');
 }
 
 // Jarvis lyssnar hela tiden – ingen knapp behövs.
@@ -84,19 +87,6 @@ if (SR) {
   };
   // Starta om lyssningen automatiskt om den stannar
   rec.onend = () => { try { rec.start(); } catch { /* redan startad */ } };
-  rec.onerror = (e) => {
-    if (e.error === 'not-allowed') {
-      setSubtitle('Mikrofonåtkomst nekad – tillåt mikrofonen för att prata med Jarvis.', true);
-    }
-  };
 
-  try {
-    rec.start();
-    setStatus('LYSSNAR…');
-    setSubtitle('Hej! Jag är Jarvis. Prata med mig så svarar jag.');
-  } catch {
-    setSubtitle('Kunde inte starta mikrofonen.', true);
-  }
-} else {
-  setSubtitle('Röstinmatning stöds inte i denna miljö.', true);
+  try { rec.start(); } catch { /* mikrofon saknas */ }
 }
