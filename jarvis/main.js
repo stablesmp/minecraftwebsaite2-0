@@ -15,7 +15,7 @@ function createWindow() {
   const win = new BrowserWindow({
     width: 1100,
     height: 750,
-    backgroundColor: '#050a18',
+    backgroundColor: '#000000',
     title: 'JARVIS 1.0',
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

@@ -1,7 +1,7 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
 body {
-  background: radial-gradient(ellipse at center, #0a1330 0%, #050a18 70%);
+  background: #000;
   color: #cfe6ff;
   font-family: "Segoe UI", system-ui, sans-serif;
   height: 100vh;
@@ -19,17 +19,6 @@ body {
   justify-content: center;
 }
 .rings { width: min(70vh, 80%); }
-
-.bracket {
-  position: absolute;
-  width: 34px; height: 34px;
-  border: 2px solid #3b8bff;
-  opacity: 0.8;
-}
-.bracket.tl { top: 12%; left: 18%; border-right: none; border-bottom: none; }
-.bracket.tr { top: 12%; right: 18%; border-left: none; border-bottom: none; }
-.bracket.bl { bottom: 16%; left: 18%; border-right: none; border-top: none; }
-.bracket.br { bottom: 16%; right: 18%; border-left: none; border-top: none; }
 
 .spin, .spin-rev, .spin-slow, .spin-nodes { transform-origin: 250px 250px; }
 .spin-nodes { animation: rot 28s linear infinite reverse; }
